@@ -1,7 +1,7 @@
 import React from 'react'
 import MenuItem from '../menu-item/index'
 
-import './directory.style.scss'
+import './directory.styles.scss'
 
 const sectionData = [
   {
