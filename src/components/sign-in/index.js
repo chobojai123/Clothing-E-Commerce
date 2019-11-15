@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import * as PropTypes from 'prop-types'
 import FormInput from '../form-input'
 import CustomButton from '../custom-button'
+
+import { signInWithGoogle } from '../../firebase/firebase.utils'
 
 import './sign-in.style.scss'
 
@@ -43,8 +44,12 @@ const SignIn = () => {
           handleOnChange={handleOnChange}
           required
         />
-
-        <CustomButton type="submit">SIGN IN</CustomButton>
+        <div className="buttons">
+          <CustomButton type="submit">SIGN IN</CustomButton>
+          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            SIGN IN WITH GOOGLE
+          </CustomButton>
+        </div>
       </form>
     </div>
   )
