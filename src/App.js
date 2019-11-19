@@ -5,16 +5,29 @@ import ShopPage from './pages/shop'
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up'
 import Header from './components/header'
 import './App.css'
-import { auth } from './firebase/firebase.utils'
+import {
+  auth,
+  createUserProfileDocument
+} from './firebase/firebase.utils'
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(
-      setCurrentUser
+      async userAuth => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth)
+          userRef.onSnapshot(snapshot => {
+            setCurrentUser({
+              id: snapshot.id,
+              ...snapshot.data()
+            })
+          })
+        }
+        setCurrentUser(userAuth)
+      }
     )
-
     return () => unsubscribeFromAuth()
   }, [])
 

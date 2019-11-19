@@ -8,9 +8,9 @@ const CustomButton = ({
   ...otherProps
 }) => (
   <button
-    className={`${
-      isGoogleSignIn ? 'google-sign-in' : ''
-    } custom-button`}
+    className={classNames('custom-button', {
+      'google-sign-in': isGoogleSignIn
+    })}
     {...otherProps}
   >
     {children}
