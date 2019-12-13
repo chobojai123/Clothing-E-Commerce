@@ -6,10 +6,12 @@ import * as PropTypes from 'prop-types'
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg'
 
 import { auth } from '../../firebase/firebase.utils'
+import CartIcon from '../cart-icon/index'
+import CartDropDown from '../cart-dropdown/index'
 
 import './header.styles.scss'
 
-const Header = ({ currentUser = {} }) => {
+const Header = ({ currentUser = {}, hidden = false }) => {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -31,17 +33,24 @@ const Header = ({ currentUser = {} }) => {
             SIGN OUT
           </div>
         )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CartDropDown />}
     </div>
   )
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = ({
+  user: { currentUser },
+  cart: { hidden }
+}) => ({
+  currentUser,
+  hidden
 })
 
 Header.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  hidden: PropTypes.bool
 }
 
 export default connect(mapStateToProps)(Header)
