@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom'
 import * as PropTypes from 'prop-types'
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg'
 
+import { getIsCartHidden } from '../../redux/cart/selectors'
+import { getCurrentUser } from '../../redux/user/selectors'
 import { auth } from '../../firebase/firebase.utils'
 import CartIcon from '../cart-icon/index'
 import CartDropDown from '../cart-dropdown/index'
-
 import './header.styles.scss'
 
 const Header = ({ currentUser = {}, hidden = false }) => {
@@ -40,12 +41,9 @@ const Header = ({ currentUser = {}, hidden = false }) => {
   )
 }
 
-const mapStateToProps = ({
-  user: { currentUser },
-  cart: { hidden }
-}) => ({
-  currentUser,
-  hidden
+const mapStateToProps = state => ({
+  currentUser: getCurrentUser(state),
+  hidden: getIsCartHidden(state)
 })
 
 Header.propTypes = {
