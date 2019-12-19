@@ -4,7 +4,11 @@ import {
   getCartItems,
   getCartTotal
 } from '../../redux/cart/selectors'
-import { removeItem } from '../../redux/cart/actions.js'
+import {
+  addCartItem,
+  removeCartItem,
+  clearCartItem
+} from '../../redux/cart/actions.js'
 
 import CheckoutItem from '../../components/checkout-item'
 import './checkout.styles.scss'
@@ -13,8 +17,10 @@ const CheckoutPage = () => {
   const dispatch = useDispatch()
   const cartItems = useSelector(getCartItems)
   const cartTotal = useSelector(getCartTotal)
-  const removeCartItem = item => dispatch(removeItem(item))
-  console.log(cartItems)
+  const clearItem = item => dispatch(clearCartItem(item))
+  const addItem = item => dispatch(addCartItem(item))
+  const removeItem = item => dispatch(removeCartItem(item))
+
   return (
     <div className="checkout-page">
       <div className="checkout-header">
@@ -38,7 +44,9 @@ const CheckoutPage = () => {
         <CheckoutItem
           key={cartItem.id}
           cartItem={cartItem}
-          removeCartItem={removeCartItem}
+          clearItem={clearItem}
+          addItem={addItem}
+          removeItem={removeItem}
         />
       ))}
       <div className="total">

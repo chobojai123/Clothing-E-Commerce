@@ -1,9 +1,10 @@
 import {
   TOGGLE_HIDDEN_CART,
   CART_ADD,
-  CART_REMOVE
+  CART_REMOVE,
+  CART_CLEAR_ITEM
 } from '../../constants'
-import { addItemToCart } from './utils'
+import { addItemToCart, removeItemToCart } from './utils'
 
 const initialState = {
   hidden: true,
@@ -23,6 +24,11 @@ const cart = (state = initialState, action) => {
         cartItems: addItemToCart(state.cartItems, action.payload)
       }
     case CART_REMOVE:
+      return {
+        ...state,
+        cartItems: removeItemToCart(state.cartItems, action.payload)
+      }
+    case CART_CLEAR_ITEM:
       return {
         ...state,
         cartItems: state.cartItems.filter(
