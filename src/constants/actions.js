@@ -2,3 +2,4 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 
 export const TOGGLE_HIDDEN_CART = 'TOGGLE_HIDDEN_CART'
 export const CART_ADD = 'CART_ADD'
+export const CART_REMOVE = 'CART_REMOVE'

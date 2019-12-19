@@ -2,7 +2,10 @@ import React from 'react'
 
 import './checkout-item.styles.scss'
 
-const CheckoutItem = ({ cartItem }) => {
+const CheckoutItem = ({
+  cartItem = {},
+  removeCartItem = () => {}
+}) => {
   const { name, imageUrl, price, quantity } = cartItem
   return (
     <div className="checkout-item">
@@ -12,7 +15,12 @@ const CheckoutItem = ({ cartItem }) => {
       <span className="name">{name}</span>
       <span className="quantity">{quantity}</span>
       <span className="price">{price}</span>
-      <span className="remove-button"></span>
+      <span
+        className="remove-button"
+        onClick={() => removeCartItem(cartItem)}
+      >
+        &#10005;
+      </span>
     </div>
   )
 }
