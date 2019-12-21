@@ -1,4 +1,4 @@
-export const SHOP_DATA = [
+export const shopData = [
   {
     id: 1,
     title: 'Hats',

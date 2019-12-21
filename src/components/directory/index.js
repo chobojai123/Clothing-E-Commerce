@@ -1,47 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import MenuItem from '../menu-item/index'
+import { getDirectorySections } from '../../redux/directory/selectors'
 
 import './directory.styles.scss'
 
-const sectionData = [
-  {
-    title: 'hats',
-    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-    id: 1,
-    linkUrl: 'shop/hats'
-  },
-  {
-    title: 'jackets',
-    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-    id: 2,
-    linkUrl: 'shop/jackets'
-  },
-  {
-    title: 'sneakers',
-    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-    id: 3,
-    linkUrl: 'shop/sneakers'
-  },
-  {
-    title: 'womens',
-    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-    size: 'large',
-    id: 4,
-    linkUrl: 'shop/womens'
-  },
-  {
-    title: 'mens',
-    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-    size: 'large',
-    id: 5,
-    linkUrl: 'shop/mens'
-  }
-]
-
 const Directory = () => {
+  const directory = useSelector(getDirectorySections)
   return (
     <div className="directory-menu">
-      {sectionData.map(({ id, title, imageUrl, size, linkUrl }) => (
+      {directory.map(({ id, title, imageUrl, size, linkUrl }) => (
         <MenuItem
           key={id}
           title={title}
