@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   getCartItems,
@@ -11,6 +11,7 @@ import {
 } from '../../redux/cart/actions.js'
 
 import CheckoutItem from '../../components/checkout-item'
+import StripeCheckoutButton from '../../components/stripe-button'
 import './checkout.styles.scss'
 
 const CheckoutPage = () => {
@@ -49,9 +50,17 @@ const CheckoutPage = () => {
           removeItem={removeItem}
         />
       ))}
-      <div className="total">
-        <span>TOTAL: ${cartTotal}</span>
-      </div>
+      <div className="total">TOTAL: ${cartTotal}</div>
+      {cartTotal && (
+        <Fragment>
+          <div className="test-warning">
+            "*Please use the following test credit card for payments*
+            <br />
+            4242 4242 4242 4242
+          </div>
+          <StripeCheckoutButton price={cartTotal} />
+        </Fragment>
+      )}
     </div>
   )
 }
