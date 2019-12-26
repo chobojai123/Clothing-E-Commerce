@@ -2,6 +2,8 @@ import { createSelector } from 'reselect'
 
 export const getShop = state => state.shop
 
+export const getIsShopFetching = state => getShop(state).isFetching
+
 export const getShopCollections = createSelector(
   getShop,
   shop => shop.collections

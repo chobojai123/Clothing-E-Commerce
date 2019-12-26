@@ -1,19 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy, Suspense } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
-import HomePage from './pages/homepage'
-import ShopPage from './pages/shop'
-import SignInAndSignUpPage from './pages/sign-in-and-sign-up'
-import CheckoutPage from './pages/checkout'
 import Header from './components/header'
-import './App.css'
+import Spinner from './components/spinner'
 import {
   auth,
   createUserProfileDocument
 } from './firebase/firebase.utils'
+
+import { GlobalStyle } from './global.styles'
 import { setCurrentUser } from './redux/user/actions'
 import { getCurrentUser } from './redux/user/selectors'
+
+const HomePage = lazy(() => import('./pages/homepage'))
+const ShopPage = lazy(() => import('./pages/shop'))
+const SignInAndSignUpPage = lazy(() =>
+  import('./pages/sign-in-and-sign-up')
+)
+const CheckoutPage = lazy(() => import('./pages/checkout'))
 
 function App({ currentUser = {}, setCurrentUser = () => {} }) {
   useEffect(() => {
@@ -36,22 +41,25 @@ function App({ currentUser = {}, setCurrentUser = () => {} }) {
 
   return (
     <div>
+      <GlobalStyle />
       <Header currentUser={currentUser} />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route exact path="/checkout" component={CheckoutPage} />
-        <Route
-          exact
-          path="/signin"
-          render={() =>
-            !isEmpty(currentUser) ? (
-              <Redirect to="/" />
-            ) : (
-              <SignInAndSignUpPage />
-            )
-          }
-        />
+        <Suspense fallback={Spinner}>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              !isEmpty(currentUser) ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
+        </Suspense>
       </Switch>
     </div>
   )
