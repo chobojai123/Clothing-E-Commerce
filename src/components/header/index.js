@@ -4,10 +4,9 @@ import { isEmpty } from 'lodash'
 import * as PropTypes from 'prop-types'
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg'
 
-import { getIsCartHidden } from '../../redux/cart/selectors'
 import { getCurrentUser } from '../../redux/user/selectors'
 import { auth } from '../../firebase/firebase.utils'
-import CartIcon from '../cart-icon/index'
+import CartIconContainer from '../cart-icon/cart-icon.container'
 import CartDropDown from '../cart-dropdown/index'
 
 import {
@@ -31,20 +30,18 @@ const Header = ({ currentUser = {}, hidden = false }) => (
       ) : (
         <OptionDiv onClick={() => auth.signOut()}>SIGN OUT</OptionDiv>
       )}
-      <CartIcon />
+      <CartIconContainer />
     </OptionsContainer>
     {hidden ? null : <CartDropDown />}
   </HeaderContainer>
 )
 
 const mapStateToProps = state => ({
-  currentUser: getCurrentUser(state),
-  hidden: getIsCartHidden(state)
+  currentUser: getCurrentUser(state)
 })
 
 Header.propTypes = {
-  currentUser: PropTypes.object,
-  hidden: PropTypes.bool
+  currentUser: PropTypes.object
 }
 
 export default connect(mapStateToProps)(Header)

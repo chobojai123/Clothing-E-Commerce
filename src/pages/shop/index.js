@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router'
 import { Route } from 'react-router-dom'
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container'
-import CollectionPage from '../collection/index'
+import CollectionPageContainer from '../collection/collection.container'
 import { fetchCollectionsStartAync } from '../../redux/shop/actions'
 import { getIsShopFetching } from '../../redux/shop/selectors'
 import WithSpinner from '../../components/with-spinner'
@@ -11,7 +11,7 @@ import WithSpinner from '../../components/with-spinner'
 const CollectionsOverviewWithSpinner = WithSpinner(
   CollectionsOverviewContainer
 )
-const CollectionPageWithSpinner = WithSpinner(CollectionPage)
+const CollectionPageWithSpinner = WithSpinner(CollectionPageContainer)
 
 const ShopPage = () => {
   const dispatch = useDispatch()

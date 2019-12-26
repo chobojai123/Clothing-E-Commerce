@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { toggleCartHidden } from '../../redux/cart/actions'
 import { getCartItemsCount } from '../../redux/cart/selectors'
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg'
 import './cart-icon.styles.scss'
@@ -17,6 +16,4 @@ const mapStateToProps = state => ({
   itemCount: getCartItemsCount(state)
 })
 
-export default connect(mapStateToProps, { toggleCartHidden })(
-  CartIcon
-)
+export default connect(mapStateToProps, null)(CartIcon)

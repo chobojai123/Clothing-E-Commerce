@@ -2,7 +2,7 @@ import React, { useEffect, lazy, Suspense } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
-import Header from './components/header'
+import HeaderContainer from './components/header/header.container'
 import Spinner from './components/spinner'
 import {
   auth,
@@ -42,7 +42,7 @@ function App({ currentUser = {}, setCurrentUser = () => {} }) {
   return (
     <div>
       <GlobalStyle />
-      <Header currentUser={currentUser} />
+      <HeaderContainer currentUser={currentUser} />
       <Switch>
         <Suspense fallback={Spinner}>
           <Route exact path="/" component={HomePage} />
