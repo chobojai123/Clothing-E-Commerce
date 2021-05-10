@@ -11,7 +11,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "firebase": "^7.4.0",
     "graphql": "^14.5.8",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "node-sass": "^4.13.0",
     "prettier": "^1.19.1",
     "prop-types": "^15.7.2",
